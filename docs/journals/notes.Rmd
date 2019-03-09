@@ -1,0 +1,34 @@
+# Why we use R and what R is exactly 
+
+R is both a language for statistical computing. an actual programming language. It is also an environment for data analysis, a platform for 
+
+One of the most popular languages for data analysis or data science, however you want to call it.
+
+Free to use and open source
+
+Incredible data visualisation capabilities
+
+Easy to create packages (=extensions)
+
+Community
+
+Reproducibility: scripting vs. point and click
+
+# R interface: RStudio
+
+console
+
+# R basics 
+
+calculations 
+
+variable assignment
+
+workspace - where variables live ls()
+
+r scripts
+
+
+# R regression
+
+[datacamp](https://www.datacamp.com/community/tutorials/linear-regression-R)
