@@ -1,14 +1,29 @@
 ---
-title: "Journal--Template"
+title: "Journal"
 output:
   pdf_document: default
 ---
-# Day 1
 
-This is what my makefile looks like graphically at the minute:
+Brief: 
 
-```{r, echo = FALSE, out.width='100%'}
-knitr::include_graphics(paste0(rprojroot::find_root("Makefile"),"/figures/make.png"))
-```
+*     Why use R and what it is exactly.
+*       The R language – simplified.
+*       The benefits of its statistical techniques and visualisations.
+*       A demonstration of how to create a regression model using R
 
-Now you might want to initiate an Rproject with version control. 
+# Saturday 9.3.2019
+
+* initialise github repository
+* go through course material on why use R and what it is exactly making notes
+* look for data visualisation examples
+next step: figure out presentation options
+
+# Sunday 10.3. 
+
+* contitne notes on what is R
+* start presentation - xaringan
+* contitnue with the R language simplified making notes
+* finish presentation - except for regression part
+
+next step: regression. 
+

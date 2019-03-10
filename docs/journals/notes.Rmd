@@ -1,10 +1,12 @@
 # Why we use R and what R is exactly 
 
-R is both a language for statistical computing. an actual programming language. It is also an environment for data analysis, a platform for 
+R is two things:
+* both a language for statistical computing. an actual programming language. 
+* It is also a complet environment for data analysis, a platform for data management, data exploration, analysis and visualisation
 
 One of the most popular languages for data analysis or data science, however you want to call it.
 
-Free to use and open source
+Free to use and open source, available on all three major platforms. 
 
 Incredible data visualisation capabilities
 
@@ -14,21 +16,153 @@ Community
 
 Reproducibility: scripting vs. point and click
 
+## is it worth it?
+
+Like learning anything new, learning R takes a bit of effort. But you do not need to be a computer scientist to use R. 
+
+In a way I guess it depends on what your alternative is. If it is another statistical software package, then you want to be careful if it is a commercial package. That means you are tied to licences, that can be very expensive. Perhaps your current univesity or employer has the licences for SPSS, but your next one won't and won't be willing to pay for them. With R you are no longer dependent on this. 
+
+
+## packages and community
+
+One of the advantages of R being open source is that anyone can contribute to its development. Of course it would quickly become unwieldy if downloading R meant also downloading everyone elses contributions for solving problems you will never have. 
+
+Instead you download a base version of R that is powerful enough for most applications, and then you can supplement this installation by loading additional packages as and when required. These packages are extensions that have been written by other users and made available for free. Packages contain functions and or datasets that are not available in the base instllation. 
+
+The official repository for pakcages is called CRAN and all packages, almost 14,000 of them, are fully documented with standard format help files. 
+
+Packages range from tiny to large, from well maintaned ones that everyone uses, to forgotten ones that someone wrote for their dissertation years ago and were the only person to ever use them. 
+
+This is an important part of the R ecosystem, these extensions and the community that comes along with it. More often than not, a problem that you are trying to solve was already attempted by someone else and you can easily access their code, and use their functions directly, or use their code as a template to tweak according to your needs, or even contact the authors themselves and suggest some funciton that their package is missing and they might want to add.
+
+The R community takes various shapes and forms, you can find helpful folk on dedicated Stack overflow forums and the RStudio community website, as well as following #rstats on twitter, or joining any of several mailing lists. 
+
+
+## data visualisation capabilities. 
+
+population pyramids literacy relative and absolute
+
+local spatial autocrelation maps
+
+population pyramids for prospective ageing - animation
+
+## reproducibility
+
+I want to quickly mention reproduciblitity and the importance of scripting. Many data analysis and data visualisation tools rely on point and click actions. This can be great, especially if you want to do something quick and dirty, but such work is not reproducible. It is also prone to error as anyone who has tried to highlight a column of cells in Excel knows. Using code to conduct your analysis, everything from importing the data, exploring it, running the analysis, creating the visualisations, and preparing the reports, presentations or papers, means you can rerun the analysis simply, you are transparent about the exact steps you took, to your collaborators, your peers, and most importantly, to yourself. 
+
+Although not striclty part of reproducibility, it's a good habit to get into from the start, which is liberal commenting of your code, again if for no other reason then to take pity on your future self, who will be reading through your code all confused.
+
+## interfacing with other software
+
+As I've said, R is opensource and free, and available on Widnows, Mac and linux. With the help of several packages R can also interface with just about anything you might want to interface with. You are able to import data in a number of proprietary formats, including Excel, SPSS, STATA and others. You can similarly export data to these formats, and any graphics you produce can be saved in a variety of formats including vector formats. 
+You can also interface with python, julia, netlogo, matlab, or any number of analytical tools you can think of if you want to harness the best of both worlds. 
+
+
+
 # R interface: RStudio
 
-console
+Difference between plain old R and Rstudio. 
+
+Just to clarify a bit of terminology, you should be able to distinguish between R and RStudio. R is the programming language and the suite of software facilities for data analysis and visualisation. Once you've installed R you can use it from a rather basic console. However you will find interacting with R a lot easier and more familiar if you use RStudio, which is an IDE or integrated development environment for using R. There have been several other IDEs for R over the years, and in fact you can also use R in other environments such as emacs or vim if you prefer. But Rstudio has become quite a leader in the field and integrates many functions that make using R much easier and enhancing your workflow, and is super user friendly with a great community. 
+
+[list of other IDEs ](https://datascience.stackexchange.com/questions/5345/ide-alternatives-for-r-programming-rstudio-intellij-idea-eclipse-visual-stud)
+
+# Rstudio layout
+
+* console
+
+* editor - script window
+
+* workspace & history window + more
+
+* files, plots, packages, help + more
+
+At this point I will switch from these slides to instead open an instance of Rstudio and talk you through it instead. So this is a fresh install of both R and Rstudio on a Windows machine. Rstudio is very customisable, so you can quickly make it look and feel a way you find more familiar, including swapping round the locations of the main four panels, but this is the standard setup. 
+
+ OK, we'll start in the bottom left though, this is the console, or the command window. This little 'greater than' sign is the prompt where you can type in commands and where R executes them. A quick example would be 4+7. In practice you will actually want to avoid typing directly into the console, because typing into the console is not reproducible. You want to be able to rerun your code in a way that it executes the same way, so instead we type code into a script file. 
+
+I will open a new scripting file, which fits in the fourth panel on the top left here. So now I can type in some code into the scripting file, and run it from there. I can do this by highlighting it and clicking the run button, or by using the keyboard shortcut Ctrl+enter. In fact I don't even need to highlight it, it's enough that I have the cursor placed inside a command and it will be executed, even if it spans several rows. 
+
+Script files in R have the .R extension and so let's just go ahead and save this file and call it Rbasics.R for example. Now before 
+
 
 # R basics 
 
-calculations 
+So, next I want to go through some R basics with you, explain some terminology that is required to get to grips with R. If you are used to working with more point and click types of software, for example using the menus in SPSS, then get ready for some coding :)
 
-variable assignment
+## calculations
+But let's start easy, with calculations. R can be used directly as a calculator
 
-workspace - where variables live ls()
+So let's try a few easy calculations. 
+You can use brackets as well, the usual rules apply. Now if I accidentally forget to close a bracket, this happens 
 
+If I on the other hand forget to open a bracket, we get the following error. 
+
+
+# variable assignment
+
+The next thing we will want to do is to represent numbers with variables. Once we assign a value to a variable, we are then able to call in at a later date and reuse it in that way. You will also notice that the list of variables available in our workspace can be seen here in the Environment tab. 
+
+# data types/data structures
+
+So far we have been looking at scalars, so single value variables, single numbers. But of course R can treat much more complicated objects than single numbers. 
+
+## vectors
+
+A one dimensional collection of scalars is known as a vector. In order to create a vector we need to use the function `c()` which combines together elements into a vector. We will discuss functions in a bit more detail in a minute. 
+
+So let's try to create a vector. There, you can also see it in the workspace.
+We can do math with vectors, and we can do it very efficiently, this is where R really shines. Let's see what happens when we multiply our vector with 10. I
+
+Let's do another vector quick, same lenght. Now we can try to see what happens when we add these two vectors together. You may have also noticed something else in the environment pane, namely the word num here, it's telling us these vectors are numerical. This are not the only data types, we also have string data and logical data. let's have a look: 
+
+### string data
+Actually, you know what, before I continue, I've forgotten something. This script file is starting to look a bit messy right now, and I might get confused next time I look at this not being clear what I was trying to do. So let me first go back and add some comments to make it clear. The way you add comments in R is by starting the line with a hash symbol. Anything written after the hash gets ignored when R computes the code. So let's clean this up a little bit.
+OK, now let's write a string vector
+
+### logical data
+finally, let's also write a logical vector, this is what a logical vector looks like. 
+
+You will note that vectors can only have elements of a single type, if we try to mix data types, then R will coerce them to the lowest commom denominator, e.g. 
 r scripts
+
+## functions
+
+So we've already introduced one function, which was the `c()` funciton combining elements into a vector. Let's have a look at some more, since funcitons really are the working horse of R. There are essentially three sources of functions. Some are functions that are automatically loaded when you load R. These are the most commonly used functions that you want to keep handy. 
+
+For example we could want to calculate the average value in vector one. we could of course type out the whole calculation. But that is slow and error prone.  Althernatively, we could use the sum() function and divide the sum by five. Actually, this dividing it by five is again manual and therefore error prone, we can instead use the function lenght() to get the length of the vector, that means the number of elements in it 
+
+But of course calculating the average is such a common thing that a function exists for that, it is called mean().
+
+So I've now already shown you three new functions, all of which required just one argument, the vector, in order to be executed. But functions can also have more than one argument, for example the function rnorm() which generates random numbers from the normal distribution. We can have a look at the help file for that. So this is what we are looking for, rnorm takes three arguments, n, mean and sd. So we can see that only n is compulsory, since the other arguments have defaults, which will be used if we don't select different ones. 
+
+So I said before there are three sources of functions, one are these base functions that are immediately available, a second one are user defined functions, meaning i can write a function, for example we can write a function to throw a dice. this isn't super useful, but what we can also do is add an argument to tell us how many sides this dice has. 
+
+## funcitons from packages
+the final source of functions is from packages. the very first time you want to use a package, you have to download and install it, you do this with the `install.packages()` function. every time after than, when you want to use funcitons or data from a package you load it using the `library()` function.. for example we can load the xx package, which we will be using in the regression demo part of this webinar. 
+
+
+
+
+## data.structures - data.frames. 
+
+
+
+
 
 
 # R regression
 
 [datacamp](https://www.datacamp.com/community/tutorials/linear-regression-R)
+
+
+
+# Notes on andrea
+
+Exploring Rstudio video 
+* types in `r` in the console as a demonstration - of nothing!?
+* says you have to run ctrl+enter or command+enter, which isn't true, enter is enough
+* in customizing rstudio text she says you have to place your cursor at the start or end of the code, also not true, just has to be in the command anywhere
+* in video one of module two, the R language simplified, she goes straight into functions, and also does a crap job at explaining what they are..
+* the function(objectname) bit doesn't make any sense
+* omg, the lists video... so stupid, completely unnecesary, then spends too much time talking about spaces before assignment operators, and in the end ends up being inconsistent about it.. even though data.frames are lists, you don't really need to know that to "understand them" as she says. 

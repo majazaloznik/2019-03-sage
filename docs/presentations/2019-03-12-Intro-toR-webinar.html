@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Introduction to R for Social Scientists</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Maja Založnik" />
+    <meta name="date" content="2019-03-12" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introduction to R for Social Scientists
+### Maja Založnik
+### 12 March 2019
+
+---
+
+
+# Outline
+
+* What exactly is R and why do we use it?
+
+* The Rstudio way of interfacing with R
+
+* The R language simplified
+
+* A live demonstration of how to create a regression model using R
+
+---
+
+#  What exactly is R and why do we use it?
+
+--
+
+`1.`  R is a programming language
+
+--
+
+`2.`  R is an environment for data analysis 
+
+--
+
+R is one of the most popular platforms for data analysis, with an expanding user base as well as ever expanding funcitonality.
+
+--
+
+* Free, open source and available on all three major platforms
+
+--
+
+* Countless extensions (packages) and interfaces with other programmes
+
+--
+
+* Great community 
+
+--
+
+* Excellent data visualisation capabilities
+
+--
+
+* Making reproducibile research the norm
+
+---
+# Dataviz examples
+### Lexis maps - Logged death rates 14 European countries 1900 -
+
+&lt;img src="figures/lexis.jpg" width="1309" /&gt;
+
+---
+# Dataviz examples
+### Local Autocorrelation--UK census 2001
+
+&lt;img src="figures/lisa1.jpg" width="1300" /&gt;
+
+---
+# Dataviz examples
+### Local Autocorrelation--UK census 2001
+
+&lt;img src="figures/lisa2.jpg" width="1253" /&gt;
+
+---
+# Dataviz examples
+### Stacked bar charts: Household living arrangements of older people
+
+&lt;img src="figures/botswana.jpg" width="700px" /&gt;
+
+---
+# Dataviz examples--animation
+### Korea: Population pyramid
+
+![](figures/pyramid_65_Republic_of_Korea_1980-2015.gif)&lt;!-- --&gt;
+---
+# Dataviz examples--animation
+### Korea: Population pyramid
+
+![](figures/pyramid_65_Republic_of_Korea_2015-2050.gif)&lt;!-- --&gt;
+---
+# Dataviz examples--interactivity
+
+&lt;img src="figures/vietnam.jpg" width="700px" /&gt;
+[Interactive datavis solution using `shiny` in R](https://maja.shinyapps.io/VHLSS/)
+
+---
+
+# Dataviz examples--galleries
+
+[https://www.r-graph-gallery.com/](https://www.r-graph-gallery.com/)
+
+
+
+[https://shiny.rstudio.com/gallery/](https://shiny.rstudio.com/gallery/)
+
+# Rstudio
+
+
+* Difference between plain old R and Rstudio.
+
+--
+
+* Other IDEs (Integrated development environemnts)
+
+--
+
+* Rstudio layout:
+  + console---command window
+  + script window---editor
+  + workspace &amp; history window + more
+  + files, plots, packages, help + more
+
+---
+
+# The R language simplified
+
+* calculations
+
+* variable assignment
+
+* vectors and data types 
+
+* functions
+  + base R
+  + written by us
+  + from packages
+
+* data frames
+
+---
+
+# LInear Regression Modelling in R
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

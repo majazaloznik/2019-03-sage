@@ -1,0 +1,162 @@
+---
+title: "Introduction to R for Social Scientists"
+author: "Maja Založnik"
+date: "12 March 2019"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+# Outline
+
+* What exactly is R and why do we use it?
+
+* The Rstudio way of interfacing with R
+
+* The R language simplified
+
+* A live demonstration of how to create a regression model using R
+
+---
+
+#  What exactly is R and why do we use it?
+
+--
+
+`1.`  R is a programming language
+
+--
+
+`2.`  R is an environment for data analysis 
+
+--
+
+R is one of the most popular platforms for data analysis, with an expanding user base as well as ever expanding funcitonality.
+
+--
+
+* Free, open source and available on all three major platforms
+
+--
+
+* Countless extensions (packages) and interfaces with other programmes
+
+--
+
+* Great community 
+
+--
+
+* Making reproducibile research the norm
+
+--
+
+* Excellent data visualisation capabilities
+
+---
+# Dataviz examples
+### Lexis maps - Logged death rates 14 European countries 1900 -
+
+```{r echo = FALSE}
+knitr::include_graphics("figures/lexis.jpg")
+```
+
+---
+# Dataviz examples
+### Local Autocorrelation--UK census 2001
+
+```{r echo = FALSE}
+knitr::include_graphics("figures/lisa1.jpg")
+```
+
+---
+# Dataviz examples
+### Local Autocorrelation--UK census 2001
+
+```{r echo = FALSE}
+knitr::include_graphics("figures/lisa2.jpg")
+```
+
+---
+# Dataviz examples
+### Stacked bar charts: Household living arrangements of older people
+
+```{r, echo = FALSE, out.width = "700px"}
+knitr::include_graphics("figures/botswana.jpg")
+```
+
+---
+# Dataviz examples--animation
+### Korea: Population pyramid
+
+```{r echo = FALSE}
+knitr::include_graphics("figures/pyramid_65_Republic_of_Korea_1980-2015.gif")
+```
+---
+# Dataviz examples--animation
+### Korea: Population pyramid
+
+```{r echo = FALSE}
+knitr::include_graphics("figures/pyramid_65_Republic_of_Korea_2015-2050.gif")
+```
+---
+# Dataviz examples--interactivity
+
+```{r, echo = FALSE, out.width = "700px"}
+knitr::include_graphics("figures/vietnam.jpg")
+```
+[Interactive datavis solution using `shiny` in R](https://maja.shinyapps.io/VHLSS/)
+
+---
+
+# Dataviz examples--galleries
+
+[https://www.r-graph-gallery.com/](https://www.r-graph-gallery.com/)
+
+
+
+[https://shiny.rstudio.com/gallery/](https://shiny.rstudio.com/gallery/)
+
+---
+
+# Rstudio
+
+
+* Difference between plain old R and Rstudio.
+
+--
+
+* Other IDEs (Integrated development environemnts)
+
+--
+
+* Rstudio layout:
+  + console---command window
+  + script window---editor
+  + workspace & history window + more
+  + files, plots, packages, help + more
+
+---
+
+# The R language simplified
+
+* calculations
+
+* variable assignment
+
+* vectors and data types 
+
+* functions
+  + base R
+  + written by us
+  + from packages
+
+* data frames
+
+---
+
+# Linear Regression Modelling in R
+
