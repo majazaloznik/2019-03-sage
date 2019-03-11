@@ -143,20 +143,274 @@ knitr::include_graphics("figures/vietnam.jpg")
 
 # The R language simplified
 
-* calculations
+## calculations
 
-* variable assignment
+```{r}
+19 + 3
+(3 + 5) ^ 4 - 3/17*19
+```
+---
 
-* vectors and data types 
+# The R language simplified
+## variable assignment
+```{r}
+height <- 11
+width <- 5
+height
+width
+area <- height * width
+area 
+height <- 7
+area
+area <- height * width
+area
+```
 
-* functions
-  + base R
-  + written by us
-  + from packages
+---
+# The R language simplified
 
-* data frames
+### vectors and data types 
+
+```{r}
+# numeric vectors
+vec1 <- c(20, 33, 41, 22, 12)
+vec1
+vec2 <- 1:5
+vec2
+vec1 + vec2
+vec1 * 10
+vec2 + 1000
+```
+---
+# The R language simplified
+
+### vectors and data types 
+```{r}
+# string  vectors
+vec3 <- c("Maja", "Michael", "Amy", "Nabila", "Taylor")
+vec3
+# logical vectors 
+vec4 <- c(TRUE, FALSE, FALSE, TRUE, TRUE)
+vec4
+```
+
+
+---
+# The R language simplified
+
+### functions in base R
+
+```{r}
+# calculate the average
+(3 + 1 + 5 + 2 + 5)/5
+sum(vec1)/5
+sum(vec1)/length(vec1)
+mean(vec1)
+```
+
+---
+# The R language simplified
+
+### functions in base R
+
+```{r}
+# sample from normal distribution
+rnorm(10)
+rnorm(10, 5)
+rnorm(10, 5, 100)
+```
+
+---
+# The R language simplified
+
+### functions written by us
+
+```{r}
+# user defined funcitons
+sample(1:6, 1)
+dice <- function(){sample(1:6, 1)}
+dice()
+
+dice.new <- function(sides){sample(1:sides, 1)}
+dice.new(3)
+dice.new(100)
+```
+
+---
+# The R language simplified
+### data frames
+
+```{r}
+vec5 <- c(1981, 1974, 1993, 1957, 1971)
+
+data.frame(vec1, vec2, vec3, vec4, vec5)
+
+
+```
+---
+# The R language simplified
+### data frames
+
+```{r}
+vec5 <- c(1981, 1974, 1993, 1957, 1971)
+
+my.df <- data.frame(id = vec2, 
+                    year.born = vec5, 
+                    name = vec3, 
+                    rps = vec1,  
+                    like.wc = vec4)
+my.df
+
+```
+
+---
+# The R language simplified - plots
+
+```{r}
+plot(my.df$rps)
+```
+---
+# The R language simplified - plots
+
+```{r}
+hist(my.df$rps)
+```
+---
+# Linear Regression Modelling in R
+
+```{r}
+# load data and explore
+library(gapminder)
+head(gapminder)
+length(unique(gapminder$country))
+min(gapminder$year)
+max(gapminder$year)
+```
+---
+# Linear Regression Modelling in R
+
+```{r}
+plot(jitter(gapminder$year), gapminder$lifeExp)
+```
+---
+# Linear Regression Modelling in R
+
+```{r}
+reg1 <- lm(lifeExp ~ year, data = gapminder)
+
+summary(reg1)
+
+```
+
+---
+# Linear Regression Modelling in R
+
+```{r, out.height = "450px"}
+plot(jitter(gapminder$year), gapminder$lifeExp)
+abline(reg1$coefficients, col = "red", lwd = 3)
+```
+
+---
+# Linear Regression Modelling in R
+
+```{r}
+reg2 <- lm(lifeExp ~ gdpPercap, data = gapminder)
+summary(reg2)
+```
+
+---
+# Linear Regression Modelling in R
+
+```{r, out.height = "450px"}
+plot(gapminder$gdpPercap, gapminder$lifeExp)
+abline(reg2$coefficients, col = "red", lwd = 3)
+```
+
+---
+# Bivariate regression 2
+
+```{r, out.height = "450px"}
+reg3 <- lm(lifeExp ~ log(gdpPercap), data = gapminder)
+summary(reg3)
+```
+---
+## Bivariate regression with transformed variable
+
+```{r, out.height = "450px"}
+plot(log(gapminder$gdpPercap), gapminder$lifeExp)
+abline(reg3$coefficients, col = "red", lwd = 3)
+```
+
+---
+## Multiple regression
+
+```{r}
+reg4 <- lm(lifeExp ~ log(gdpPercap) + year, data = gapminder)
+summary(reg4)
+```
+
+---
+## Multiple regression with categorical variable
+
+```{r}
+gapminder.2007 <- subset(gapminder, year == 2007)
+reg5 <- lm(lifeExp ~ log(gdpPercap)  + continent, data = gapminder.2007)
+summary(reg5)
+```
+---
+## Multiple regression with categorical variable
+
+```{r, echo = FALSE}
+coef <- reg5$coefficients
+
+plot(log(gapminder.2007$gdpPercap), gapminder.2007$lifeExp, 
+     col =gapminder.2007$continent, pch = 19)
+
+abline(coef[1], coef[2], col = "black")
+abline(coef[1]+ coef[3], coef[2], col = "red")
+abline(coef[1]+ coef[4], coef[2], col = "green3")
+abline(coef[1]+ coef[5], coef[2], col = "blue")
+abline(coef[1]+ coef[6], coef[2], col = "cyan")
+
+legend("topleft", legend = c("Africa", "Americas", "Asia", "Europe", "Oceania"),
+       col = 1:5, pch = 19)
+```
+---
+## Multiple regression with interaction term
+
+```{r, echo = FALSE}
+reg6 <- lm(lifeExp ~ log(gdpPercap) * continent, data = gapminder.2007)
+summary(reg6)
+```
+---
+## Multiple regression with interaction term
+
+```{r, echo = FALSE}
+plot(log(gapminder.2007$gdpPercap), gapminder.2007$lifeExp, 
+     col = gapminder.2007$continent, pch = 19)
+
+abline(reg6$coefficients[1], reg6$coefficients[2])
+abline(reg6$coefficients[1] + reg6$coefficients[3], 
+       reg6$coefficients[2] + reg6$coefficients[7], col = "green3")
+
+abline(reg6$coefficients[1] + reg6$coefficients[4], 
+       reg6$coefficients[2] + reg6$coefficients[8], col = "red")
+
+abline(reg6$coefficients[1] + reg6$coefficients[5], 
+       reg6$coefficients[2] + reg6$coefficients[9], col = "blue")
+
+abline(reg6$coefficients[1] + reg6$coefficients[6], 
+       reg6$coefficients[2] + reg6$coefficients[10], col = "cyan")
+
+legend("topleft", legend = c("Africa", "Americas", "Asia", "Europe", "Oceania"),
+       col = 1:5, pch = 19)
+```
 
 ---
 
-# Linear Regression Modelling in R
-
+## Multiple regression with interaction term
+```{r, echo = FALSE}
+suppressMessages(library(effects))
+interaction <- effect("log(gdpPercap) * continent", reg6)
+plot(interaction, style = "line", multiline = TRUE)
+```

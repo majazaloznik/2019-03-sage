@@ -138,7 +138,7 @@ So I've now already shown you three new functions, all of which required just on
 
 So I said before there are three sources of functions, one are these base functions that are immediately available, a second one are user defined functions, meaning i can write a function, for example we can write a function to throw a dice. this isn't super useful, but what we can also do is add an argument to tell us how many sides this dice has. 
 
-## funcitons from packages
+## functions from packages
 the final source of functions is from packages. the very first time you want to use a package, you have to download and install it, you do this with the `install.packages()` function. every time after than, when you want to use funcitons or data from a package you load it using the `library()` function.. for example we can load the xx package, which we will be using in the regression demo part of this webinar. 
 
 
@@ -146,14 +146,60 @@ the final source of functions is from packages. the very first time you want to 
 
 ## data.structures - data.frames. 
 
+Now at this point you might still be missing one important thing: if you are used to working with most other statistical software you might be wondering: but where are the tables? 
 
+In R the standard type of table is called a data.frame. A data.frame is essentially a collection of vectors of the same lenght. Each vector is therefore a variable, so you can see now why it also makes sense that they can only be of one type. And of course it makes sense that they all have to be the same length, that is the number of rows in our data.frame. 
 
+There are several ways to get a dataframe, most often you will actually import it from a csv file or any other type of file. But you can also create one from scratch, by combining together a set of vectors that fit the bill. So let's use the vectors we created before to create a data.frame. 
 
+I'll first add an additional vector, to make it a bit more interesting. 
+
+OK, so combining them all together we get the following. Now I actually want to clean this up a little bit. For example the names of the variables are not informative at all, so we should change that. And also I think the order would make more sense this way, let's see how that looks like now. Excellent. Now of course we want to save this. 
+
+Now you see my.df has become available here in the workspace and if we click on it we get the Rstudio data viewer. This will seem familiar to anyone used to excel or spss, and that is kind of the reason for it being here really. But there are some importand differences. You cannot change the data in the data viewer. This is in line with principles of reproducibility, making it difficult to make changes to the data, you have to make changes programatically, not by clickin only. 
+
+OK, now that we have a data.frame, let's do a few quick plots while we're at it. So once the vectors are in the dataframe, the names of the columns are not objects in our environments, so year.born doesn't exist as an object outside of the data.frame. So in order to access it directly we use the dollar sign: `my.df$rpc`
+
+Now we can plot the values of the rock paper scissors score simply like this, where the x axis is simply the index of each case, so the row number. This is just to demonstrate to you how simply we can change the type of chart, or colour, or type of symbol. 
+
+We can also do a histogram of the rps scores.
+
+Of course a scatter plot is probably a more interesting way to look at the data, so let's try that. 
 
 
 # R regression
 
 [datacamp](https://www.datacamp.com/community/tutorials/linear-regression-R)
+
+So we will finish this demonstration off with a look at ordinary least squares regression, since this is a common method of modelling a continuous dependent variable. 
+
+In real life you will have to deal with a lot of what we call janitor work, getting your data ready for analysis, cleaning, adjusting, labelling et cetera. We will skip this part here and work with a nice and tidy data set from gapminder. 
+
+So let's have a lookd at the data first. We load it using library(gapminder). We can have a quick look at the table using the head funcition, which shows us the first six rows of the table. If we want to see the table in the viewer, you will notice that it is not in the global environment, but if you look at this menu here you will find the package environment where it is.
+So we've got data for countries, life expectancy, population size, gdp per capita, for the following years. So in this analysis we will treat life expectancy as the dependent variable, and the year and gdp per capita as independent variables. 
+
+Let's first look at the individual correlations between the variables. This is life expectancy by year. In order to get a better view of the data, we can actually add some jitter to the year varible, because the points are all stacked together now making it difficult to see the distribution.
+
+And this is life expectancy by gdp per capita. 
+
+So in order to fit a linear regression model in R we use the function  lm() which stands for linear model, and is in loaded with the basic R packages. The lm() function can take numerous arguments, all of which are explained in the help, but for now we will only use two: the formula and the data. 
+
+So we will first regress the life expectancy on the year. We will save the regression model into a new object calling it reg1 and inspect it using summary(). Now let's just quickly unpack this. At the top we have a reminder of the function call. 
+
+So the first thing we probably want to look at are the coefficients, and they are here: the intercept is minus 585 and the coefficient for the year is point 3. We can extract them quite easily from the reg1 object, which is a list, by using the dollar sign like so. 
+Now there is actually a nice plotting function in R called abline, which will plot a line using slope and intercept values, so we can try that. So this simple model is saying that for every year increase the live expectancy goes up by about a third of a year on average. The standard error is very low here, so the actual average life expectancy is .016 of a year off the model's predictions. Then we have the t values for the coefficients, which are very high in this case and consequently the p-values for both coefficients are highly significant. Meaning that if there were no relationship between the two variables we would be highly unlikely to have observed this data. 
+
+What else do we have, we have a summarey of the distribution of the residuals here. We can see they don't look perfectly symmetrical, so we could investigate that a bit further, but we're not going to now. 
+
+So how good a model is this for explainign the variation in life expectancy? Well, we've got the R squared value down here, and it's about 19 percent, so not ideal. So roughtly 19 percent of the variance in life expectancy is explained by the year in which it is measured. Now R squared can only increase as you add more predictors, so for multiple regressions you would want to look at the adjusted r squared instead, which we will do in a second. 
+
+So now let's try gdp per capita as well, simple model looks like this. 
+
+Of course you can probably quickly think of what would imporve this model substantially, which is to take the logarithm of the gdp, and linearise the relationship. So let's try that. Lovely
+
+Now let's try a multiple regression model, so add both predictors into our model and see how that affects it: 
+
+
 
 
 

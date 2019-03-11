@@ -59,11 +59,11 @@ R is one of the most popular platforms for data analysis, with an expanding user
 
 --
 
-* Excellent data visualisation capabilities
+* Making reproducibile research the norm
 
 --
 
-* Making reproducibile research the norm
+* Excellent data visualisation capabilities
 
 ---
 # Dataviz examples
@@ -115,6 +115,8 @@ R is one of the most popular platforms for data analysis, with an expanding user
 
 [https://shiny.rstudio.com/gallery/](https://shiny.rstudio.com/gallery/)
 
+---
+
 # Rstudio
 
 
@@ -136,22 +138,611 @@ R is one of the most popular platforms for data analysis, with an expanding user
 
 # The R language simplified
 
-* calculations
+## calculations
 
-* variable assignment
 
-* vectors and data types 
+```r
+19 + 3
+```
 
-* functions
-  + base R
-  + written by us
-  + from packages
+```
+## [1] 22
+```
 
-* data frames
+```r
+(3 + 5) ^ 4 - 3/17*19
+```
+
+```
+## [1] 4092.647
+```
+---
+
+# The R language simplified
+## variable assignment
+
+```r
+height &lt;- 11
+width &lt;- 5
+height
+```
+
+```
+## [1] 11
+```
+
+```r
+width
+```
+
+```
+## [1] 5
+```
+
+```r
+area &lt;- height * width
+area 
+```
+
+```
+## [1] 55
+```
+
+```r
+height &lt;- 7
+area
+```
+
+```
+## [1] 55
+```
+
+```r
+area &lt;- height * width
+area
+```
+
+```
+## [1] 35
+```
+
+---
+# The R language simplified
+
+### vectors and data types 
+
+
+```r
+# numeric vectors
+vec1 &lt;- c(20, 33, 41, 22, 12)
+vec1
+```
+
+```
+## [1] 20 33 41 22 12
+```
+
+```r
+vec2 &lt;- 1:5
+vec2
+```
+
+```
+## [1] 1 2 3 4 5
+```
+
+```r
+vec1 + vec2
+```
+
+```
+## [1] 21 35 44 26 17
+```
+
+```r
+vec1 * 10
+```
+
+```
+## [1] 200 330 410 220 120
+```
+
+```r
+vec2 + 1000
+```
+
+```
+## [1] 1001 1002 1003 1004 1005
+```
+---
+# The R language simplified
+
+### vectors and data types 
+
+```r
+# string  vectors
+vec3 &lt;- c("Maja", "Michael", "Amy", "Nabila", "Taylor")
+vec3
+```
+
+```
+## [1] "Maja"    "Michael" "Amy"     "Nabila"  "Taylor"
+```
+
+```r
+# logical vectors 
+vec4 &lt;- c(TRUE, FALSE, FALSE, TRUE, TRUE)
+vec4
+```
+
+```
+## [1]  TRUE FALSE FALSE  TRUE  TRUE
+```
+
+
+---
+# The R language simplified
+
+### functions in base R
+
+
+```r
+# calculate the average
+(3 + 1 + 5 + 2 + 5)/5
+```
+
+```
+## [1] 3.2
+```
+
+```r
+sum(vec1)/5
+```
+
+```
+## [1] 25.6
+```
+
+```r
+sum(vec1)/length(vec1)
+```
+
+```
+## [1] 25.6
+```
+
+```r
+mean(vec1)
+```
+
+```
+## [1] 25.6
+```
+
+---
+# The R language simplified
+
+### functions in base R
+
+
+```r
+# sample from normal distribution
+rnorm(10)
+```
+
+```
+##  [1] -2.4020566 -1.4123053 -1.0886212  1.4511585 -1.8504221 -0.7594560
+##  [7]  0.2105726  0.5916077 -0.9387110 -0.7192908
+```
+
+```r
+rnorm(10, 5)
+```
+
+```
+##  [1] 5.747542 4.946795 5.203990 4.027130 3.757653 3.911023 4.751782
+##  [8] 3.246743 4.123421 4.806547
+```
+
+```r
+rnorm(10, 5, 100)
+```
+
+```
+##  [1]   64.658124 -236.345844   15.465994   -3.938493 -179.734777
+##  [6]   64.107819  -61.950065  172.881418  -57.965203  -45.035335
+```
+
+---
+# The R language simplified
+
+### functions written by us
+
+
+```r
+# user defined funcitons
+sample(1:6, 1)
+```
+
+```
+## [1] 1
+```
+
+```r
+dice &lt;- function(){sample(1:6, 1)}
+dice()
+```
+
+```
+## [1] 3
+```
+
+```r
+dice.new &lt;- function(sides){sample(1:sides, 1)}
+dice.new(3)
+```
+
+```
+## [1] 1
+```
+
+```r
+dice.new(100)
+```
+
+```
+## [1] 70
+```
+
+---
+# The R language simplified
+### data frames
+
+
+```r
+vec5 &lt;- c(1981, 1974, 1993, 1957, 1971)
+
+data.frame(vec1, vec2, vec3, vec4, vec5)
+```
+
+```
+##   vec1 vec2    vec3  vec4 vec5
+## 1   20    1    Maja  TRUE 1981
+## 2   33    2 Michael FALSE 1974
+## 3   41    3     Amy FALSE 1993
+## 4   22    4  Nabila  TRUE 1957
+## 5   12    5  Taylor  TRUE 1971
+```
+---
+# The R language simplified
+### data frames
+
+
+```r
+vec5 &lt;- c(1981, 1974, 1993, 1957, 1971)
+
+my.df &lt;- data.frame(id = vec2, 
+                    year.born = vec5, 
+                    name = vec3, 
+                    rps = vec1,  
+                    like.wc = vec4)
+my.df
+```
+
+```
+##   id year.born    name rps like.wc
+## 1  1      1981    Maja  20    TRUE
+## 2  2      1974 Michael  33   FALSE
+## 3  3      1993     Amy  41   FALSE
+## 4  4      1957  Nabila  22    TRUE
+## 5  5      1971  Taylor  12    TRUE
+```
+
+---
+# The R language simplified - plots
+
+
+```r
+plot(my.df$rps)
+```
+
+![](2019-03-12-Intro-toR-webinar_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+---
+# The R language simplified - plots
+
+
+```r
+hist(my.df$rps)
+```
+
+![](2019-03-12-Intro-toR-webinar_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+---
+# Linear Regression Modelling in R
+
+
+```r
+# load data and explore
+library(gapminder)
+head(gapminder)
+```
+
+```
+## # A tibble: 6 x 6
+##   country     continent  year lifeExp      pop gdpPercap
+##   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
+## 1 Afghanistan Asia       1952    28.8  8425333      779.
+## 2 Afghanistan Asia       1957    30.3  9240934      821.
+## 3 Afghanistan Asia       1962    32.0 10267083      853.
+## 4 Afghanistan Asia       1967    34.0 11537966      836.
+## 5 Afghanistan Asia       1972    36.1 13079460      740.
+## 6 Afghanistan Asia       1977    38.4 14880372      786.
+```
+
+```r
+length(unique(gapminder$country))
+```
+
+```
+## [1] 142
+```
+
+```r
+min(gapminder$year)
+```
+
+```
+## [1] 1952
+```
+
+```r
+max(gapminder$year)
+```
+
+```
+## [1] 2007
+```
+---
+# Linear Regression Modelling in R
+
+
+```r
+plot(jitter(gapminder$year), gapminder$lifeExp)
+```
+
+![](2019-03-12-Intro-toR-webinar_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+---
+# Linear Regression Modelling in R
+
+
+```r
+reg1 &lt;- lm(lifeExp ~ year, data = gapminder)
+
+summary(reg1)
+```
+
+```
+## 
+## Call:
+## lm(formula = lifeExp ~ year, data = gapminder)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -39.949  -9.651   1.697  10.335  22.158 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -585.65219   32.31396  -18.12   &lt;2e-16 ***
+## year           0.32590    0.01632   19.96   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 11.63 on 1702 degrees of freedom
+## Multiple R-squared:  0.1898,	Adjusted R-squared:  0.1893 
+## F-statistic: 398.6 on 1 and 1702 DF,  p-value: &lt; 2.2e-16
+```
+
+---
+# Linear Regression Modelling in R
+
+
+```r
+plot(jitter(gapminder$year), gapminder$lifeExp)
+abline(reg1$coefficients, col = "red", lwd = 3)
+```
+
+&lt;img src="2019-03-12-Intro-toR-webinar_files/figure-html/unnamed-chunk-22-1.png" height="450px" /&gt;
+
+---
+# Linear Regression Modelling in R
+
+
+```r
+reg2 &lt;- lm(lifeExp ~ gdpPercap, data = gapminder)
+summary(reg2)
+```
+
+```
+## 
+## Call:
+## lm(formula = lifeExp ~ gdpPercap, data = gapminder)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -82.754  -7.758   2.176   8.225  18.426 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 5.396e+01  3.150e-01  171.29   &lt;2e-16 ***
+## gdpPercap   7.649e-04  2.579e-05   29.66   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 10.49 on 1702 degrees of freedom
+## Multiple R-squared:  0.3407,	Adjusted R-squared:  0.3403 
+## F-statistic: 879.6 on 1 and 1702 DF,  p-value: &lt; 2.2e-16
+```
+
+---
+# Linear Regression Modelling in R
+
+
+```r
+plot(gapminder$gdpPercap, gapminder$lifeExp)
+abline(reg2$coefficients, col = "red", lwd = 3)
+```
+
+&lt;img src="2019-03-12-Intro-toR-webinar_files/figure-html/unnamed-chunk-24-1.png" height="450px" /&gt;
+
+---
+# Bivariate regression 2
+
+
+```r
+reg3 &lt;- lm(lifeExp ~ log(gdpPercap), data = gapminder)
+summary(reg3)
+```
+
+```
+## 
+## Call:
+## lm(formula = lifeExp ~ log(gdpPercap), data = gapminder)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -32.778  -4.204   1.212   4.658  19.285 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     -9.1009     1.2277  -7.413 1.93e-13 ***
+## log(gdpPercap)   8.4051     0.1488  56.500  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7.62 on 1702 degrees of freedom
+## Multiple R-squared:  0.6522,	Adjusted R-squared:  0.652 
+## F-statistic:  3192 on 1 and 1702 DF,  p-value: &lt; 2.2e-16
+```
+---
+## Bivariate regression with transformed variable
+
+
+```r
+plot(log(gapminder$gdpPercap), gapminder$lifeExp)
+abline(reg3$coefficients, col = "red", lwd = 3)
+```
+
+&lt;img src="2019-03-12-Intro-toR-webinar_files/figure-html/unnamed-chunk-26-1.png" height="450px" /&gt;
+
+---
+## Multiple regression
+
+
+```r
+reg4 &lt;- lm(lifeExp ~ log(gdpPercap) + year, data = gapminder)
+summary(reg4)
+```
+
+```
+## 
+## Call:
+## lm(formula = lifeExp ~ log(gdpPercap) + year, data = gapminder)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -27.2291  -3.8454   0.6065   4.7737  17.8644 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    -3.911e+02  1.942e+01  -20.14   &lt;2e-16 ***
+## log(gdpPercap)  7.770e+00  1.381e-01   56.27   &lt;2e-16 ***
+## year            1.956e-01  9.927e-03   19.70   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 6.877 on 1701 degrees of freedom
+## Multiple R-squared:  0.7169,	Adjusted R-squared:  0.7165 
+## F-statistic:  2153 on 2 and 1701 DF,  p-value: &lt; 2.2e-16
+```
+
+---
+## Multiple regression with categorical variable
+
+
+```r
+gapminder.2007 &lt;- subset(gapminder, year == 2007)
+reg5 &lt;- lm(lifeExp ~ log(gdpPercap)  + continent, data = gapminder.2007)
+summary(reg5)
+```
+
+```
+## 
+## Call:
+## lm(formula = lifeExp ~ log(gdpPercap) + continent, data = gapminder.2007)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -19.4917  -2.3146  -0.0432   2.5498  14.8818 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        20.1376     4.0332   4.993 1.79e-06 ***
+## log(gdpPercap)      4.6308     0.5274   8.780 6.14e-15 ***
+## continentAmericas  11.6942     1.6546   7.068 7.46e-11 ***
+## continentAsia      10.1144     1.4761   6.852 2.31e-10 ***
+## continentEurope    11.2682     1.8936   5.951 2.14e-08 ***
+## continentOceania   12.9293     4.5211   2.860  0.00491 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 5.929 on 136 degrees of freedom
+## Multiple R-squared:  0.7674,	Adjusted R-squared:  0.7588 
+## F-statistic: 89.72 on 5 and 136 DF,  p-value: &lt; 2.2e-16
+```
+---
+## Multiple regression with categorical variable
+
+![](2019-03-12-Intro-toR-webinar_files/figure-html/unnamed-chunk-29-1.png)&lt;!-- --&gt;
+---
+## Multiple regression with interaction term
+
+
+```
+## 
+## Call:
+## lm(formula = lifeExp ~ log(gdpPercap) * continent, data = gapminder.2007)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -19.1483  -2.4726  -0.0517   2.2124  15.4213 
+## 
+## Coefficients:
+##                                   Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                       22.90682    6.22285   3.681 0.000337 ***
+## log(gdpPercap)                     4.26088    0.82373   5.173 8.36e-07 ***
+## continentAmericas                 10.15826   15.68051   0.648 0.518222    
+## continentAsia                      2.74329    9.80627   0.280 0.780108    
+## continentEurope                   12.53213   19.92268   0.629 0.530411    
+## continentOceania                  23.89890  279.39987   0.086 0.931964    
+## log(gdpPercap):continentAmericas   0.23319    1.79057   0.130 0.896581    
+## log(gdpPercap):continentAsia       0.89638    1.18998   0.753 0.452625    
+## log(gdpPercap):continentEurope    -0.03398    2.06360  -0.016 0.986886    
+## log(gdpPercap):continentOceania   -0.96521   27.15408  -0.036 0.971698    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 6.004 on 132 degrees of freedom
+## Multiple R-squared:  0.7685,	Adjusted R-squared:  0.7527 
+## F-statistic: 48.68 on 9 and 132 DF,  p-value: &lt; 2.2e-16
+```
+---
+## Multiple regression with interaction term
+
+![](2019-03-12-Intro-toR-webinar_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
 
 ---
 
-# LInear Regression Modelling in R
+## Multiple regression with interaction term
+![](2019-03-12-Intro-toR-webinar_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

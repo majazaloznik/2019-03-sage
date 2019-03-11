@@ -27,3 +27,7 @@ next step: figure out presentation options
 
 next step: regression. 
 
+# Monday 11.3.
+
+* continue with presentation, missing r code for r language simplified
+* missing data frames
