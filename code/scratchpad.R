@@ -101,29 +101,27 @@ plot(my.df$year.born, my.df$rps,
 
 # restart R session
 # load data
-# install.packages("gapminder")
 library(gapminder)
-head(gapminder)
 
 # inspect data
+head(gapminder)
 unique(gapminder$country)
 min(gapminder$year)
-max(gapminder$year)
 
 # plot data
-plot(jitter(gapminder$year), gapminder$lifeExp)
 
+plot(gapminder$year, gapminder$lifeExp)
 
 # regress 
 
 reg1 <- lm(lifeExp ~ year, data = gapminder)
-
 summary(reg1)
 
 # plot abline  reg1
 
 plot(jitter(gapminder$year), gapminder$lifeExp)
-abline(reg1$coefficients, col = "red", lwd = 3)
+
+abline(reg1$coefficients)
 
 # regression 2 
 
@@ -131,33 +129,35 @@ reg2 <- lm(lifeExp ~ gdpPercap, data = gapminder)
 
 summary(reg2)
 
-
 plot(gapminder$gdpPercap, gapminder$lifeExp)
 abline(reg2, col = "red", lwd = 3)
 
 # regression 3
 
-reg3 <- lm(lifeExp ~ log(gdpPercap), data = gapminder)
 
-summary(reg3)
-plot(log(gapminder$gdpPercap), gapminder$lifeExp)
-abline(reg3, col = "red", lwd = 3)
 
 # multiple regression 
 
 reg4 <- lm(lifeExp ~ log(gdpPercap) + year, data = gapminder)
-
 summary(reg4)
 
-# mulitple regression with categorical variable
-gapminder.2007 <- subset(gapminder, year == 2007)
-reg5 <- lm(lifeExp ~ log(gdpPercap)  + continent, data = gapminder.2007)
 
+# mulitple regression with categorical variable
+
+# subset of the data
+gapminder.2007 <- subset(gapminder, year == 2007)
+
+
+reg5 <- lm(lifeExp ~ log(gdpPercap)  + continent, data = gapminder.2007)
 summary(reg5)
-coef <- reg5$coefficients
+
 
 plot(log(gapminder.2007$gdpPercap), gapminder.2007$lifeExp, 
      col =gapminder.2007$continent, pch = 19)
+legend("topleft", legend = c("Africa", "Americas", "Asia", "Europe", "Oceania"),
+       col = 1:5, pch = 19)
+
+coef <- reg5$coefficients
 
 abline(coef[1], coef[2], col = "black")
 abline(coef[1]+ coef[3], coef[2], col = "red")
@@ -165,34 +165,18 @@ abline(coef[1]+ coef[4], coef[2], col = "green3")
 abline(coef[1]+ coef[5], coef[2], col = "blue")
 abline(coef[1]+ coef[6], coef[2], col = "cyan")
 
-legend("topleft", legend = c("Africa", "Americas", "Asia", "Europe", "Oceania"),
-       col = 1:5, pch = 19)
-
 # mulitple regression with categorical variable and interaction
 reg6 <- lm(lifeExp ~ log(gdpPercap) * continent, data = gapminder.2007)
-
 summary(reg6)
 
 plot(log(gapminder.2007$gdpPercap), gapminder.2007$lifeExp, 
      col = gapminder.2007$continent, pch = 19)
-
-abline(reg6$coefficients[1], reg6$coefficients[2])
-abline(reg6$coefficients[1] + reg6$coefficients[3], 
-       reg6$coefficients[2] + reg6$coefficients[7], col = "green3")
-
-abline(reg6$coefficients[1] + reg6$coefficients[4], 
-       reg6$coefficients[2] + reg6$coefficients[8], col = "red")
-
-abline(reg6$coefficients[1] + reg6$coefficients[5], 
-       reg6$coefficients[2] + reg6$coefficients[9], col = "blue")
-
-abline(reg6$coefficients[1] + reg6$coefficients[6], 
-       reg6$coefficients[2] + reg6$coefficients[10], col = "cyan")
-
 legend("topleft", legend = c("Africa", "Americas", "Asia", "Europe", "Oceania"),
        col = 1:5, pch = 19)
 
-library(effects)
-interaction <- effect("log(gdpPercap) * continent", reg6)
-plot(interaction, style = "line", multiline = TRUE)
-
+coef <- reg6$coefficients
+abline(coef[1], coef[2])
+abline(coef[1] + coef[3], coef[2] + coef[7], col = "green3")
+abline(coef[1] + coef[4], coef[2] + coef[8], col = "red")
+abline(coef[1] + coef[5], coef[2] + coef[9], col = "blue")
+abline(coef[1] + coef[6], coef[2] + coef[10], col = "cyan")

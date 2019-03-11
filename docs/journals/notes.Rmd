@@ -1,91 +1,3 @@
-# Why we use R and what R is exactly 
-
-R is two things:
-* both a language for statistical computing. an actual programming language. 
-* It is also a complet environment for data analysis, a platform for data management, data exploration, analysis and visualisation
-
-One of the most popular languages for data analysis or data science, however you want to call it.
-
-Free to use and open source, available on all three major platforms. 
-
-Incredible data visualisation capabilities
-
-Easy to create packages (=extensions)
-
-Community
-
-Reproducibility: scripting vs. point and click
-
-## is it worth it?
-
-Like learning anything new, learning R takes a bit of effort. But you do not need to be a computer scientist to use R. 
-
-In a way I guess it depends on what your alternative is. If it is another statistical software package, then you want to be careful if it is a commercial package. That means you are tied to licences, that can be very expensive. Perhaps your current univesity or employer has the licences for SPSS, but your next one won't and won't be willing to pay for them. With R you are no longer dependent on this. 
-
-
-## packages and community
-
-One of the advantages of R being open source is that anyone can contribute to its development. Of course it would quickly become unwieldy if downloading R meant also downloading everyone elses contributions for solving problems you will never have. 
-
-Instead you download a base version of R that is powerful enough for most applications, and then you can supplement this installation by loading additional packages as and when required. These packages are extensions that have been written by other users and made available for free. Packages contain functions and or datasets that are not available in the base instllation. 
-
-The official repository for pakcages is called CRAN and all packages, almost 14,000 of them, are fully documented with standard format help files. 
-
-Packages range from tiny to large, from well maintaned ones that everyone uses, to forgotten ones that someone wrote for their dissertation years ago and were the only person to ever use them. 
-
-This is an important part of the R ecosystem, these extensions and the community that comes along with it. More often than not, a problem that you are trying to solve was already attempted by someone else and you can easily access their code, and use their functions directly, or use their code as a template to tweak according to your needs, or even contact the authors themselves and suggest some funciton that their package is missing and they might want to add.
-
-The R community takes various shapes and forms, you can find helpful folk on dedicated Stack overflow forums and the RStudio community website, as well as following #rstats on twitter, or joining any of several mailing lists. 
-
-
-## data visualisation capabilities. 
-
-population pyramids literacy relative and absolute
-
-local spatial autocrelation maps
-
-population pyramids for prospective ageing - animation
-
-## reproducibility
-
-I want to quickly mention reproduciblitity and the importance of scripting. Many data analysis and data visualisation tools rely on point and click actions. This can be great, especially if you want to do something quick and dirty, but such work is not reproducible. It is also prone to error as anyone who has tried to highlight a column of cells in Excel knows. Using code to conduct your analysis, everything from importing the data, exploring it, running the analysis, creating the visualisations, and preparing the reports, presentations or papers, means you can rerun the analysis simply, you are transparent about the exact steps you took, to your collaborators, your peers, and most importantly, to yourself. 
-
-Although not striclty part of reproducibility, it's a good habit to get into from the start, which is liberal commenting of your code, again if for no other reason then to take pity on your future self, who will be reading through your code all confused.
-
-## interfacing with other software
-
-As I've said, R is opensource and free, and available on Widnows, Mac and linux. With the help of several packages R can also interface with just about anything you might want to interface with. You are able to import data in a number of proprietary formats, including Excel, SPSS, STATA and others. You can similarly export data to these formats, and any graphics you produce can be saved in a variety of formats including vector formats. 
-You can also interface with python, julia, netlogo, matlab, or any number of analytical tools you can think of if you want to harness the best of both worlds. 
-
-
-
-# R interface: RStudio
-
-Difference between plain old R and Rstudio. 
-
-Just to clarify a bit of terminology, you should be able to distinguish between R and RStudio. R is the programming language and the suite of software facilities for data analysis and visualisation. Once you've installed R you can use it from a rather basic console. However you will find interacting with R a lot easier and more familiar if you use RStudio, which is an IDE or integrated development environment for using R. There have been several other IDEs for R over the years, and in fact you can also use R in other environments such as emacs or vim if you prefer. But Rstudio has become quite a leader in the field and integrates many functions that make using R much easier and enhancing your workflow, and is super user friendly with a great community. 
-
-[list of other IDEs ](https://datascience.stackexchange.com/questions/5345/ide-alternatives-for-r-programming-rstudio-intellij-idea-eclipse-visual-stud)
-
-# Rstudio layout
-
-* console
-
-* editor - script window
-
-* workspace & history window + more
-
-* files, plots, packages, help + more
-
-At this point I will switch from these slides to instead open an instance of Rstudio and talk you through it instead. So this is a fresh install of both R and Rstudio on a Windows machine. Rstudio is very customisable, so you can quickly make it look and feel a way you find more familiar, including swapping round the locations of the main four panels, but this is the standard setup. 
-
- OK, we'll start in the bottom left though, this is the console, or the command window. This little 'greater than' sign is the prompt where you can type in commands and where R executes them. A quick example would be 4+7. In practice you will actually want to avoid typing directly into the console, because typing into the console is not reproducible. You want to be able to rerun your code in a way that it executes the same way, so instead we type code into a script file. 
-
-I will open a new scripting file, which fits in the fourth panel on the top left here. So now I can type in some code into the scripting file, and run it from there. I can do this by highlighting it and clicking the run button, or by using the keyboard shortcut Ctrl+enter. In fact I don't even need to highlight it, it's enough that I have the cursor placed inside a command and it will be executed, even if it spans several rows. 
-
-Script files in R have the .R extension and so let's just go ahead and save this file and call it Rbasics.R for example. Now before 
-
-
 # R basics 
 
 So, next I want to go through some R basics with you, explain some terminology that is required to get to grips with R. If you are used to working with more point and click types of software, for example using the menus in SPSS, then get ready for some coding :)
@@ -197,11 +109,23 @@ So now let's try gdp per capita as well, simple model looks like this.
 
 Of course you can probably quickly think of what would imporve this model substantially, which is to take the logarithm of the gdp, and linearise the relationship. So let's try that. Lovely
 
-Now let's try a multiple regression model, so add both predictors into our model and see how that affects it: 
+Now let's try a multiple regression model, so add both predictors into our model and see how that affects it: You do that by using the plus operator 
+
+interpretation  of the data
+
+social science
+
+more soft bits, 
+
+make it a bit more human relatable. 
 
 
-
-
+## Multiple regression with interaction term
+```{r, echo = FALSE}
+suppressMessages(library(effects))
+interaction <- effect("log(gdpPercap) * continent", reg6)
+plot(interaction, style = "line", multiline = TRUE)
+```
 
 # Notes on andrea
 
