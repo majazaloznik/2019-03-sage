@@ -44,11 +44,16 @@ Because R is also complete environment for data analysis, a comprehensive platfo
 
 R is one of the most popular platforms for data analysis, with an expanding user base as well as ever expanding funcitonality.
 
+???
+R is currenlty one of the most popular platforms for data analysis, with an expanding user base as well as ever expanding funcitonality.
 --
 
 So is it worth learnigng?
 
 ???
+
+So is it worth learning?
+
 Like learning anything new, learning R takes a bit of effort. But you do not need to be a computer scientist to use R, i'm definitely not :)
 
 Now although we don't have a lot of time today, I will try to give you a flavour of why you might want to take the plunge and learn R. 
@@ -57,16 +62,26 @@ Now although we don't have a lot of time today, I will try to give you a flavour
 ---
 #  What exactly is R and why do we use it?
 
-* R is free, open source and available on all three major platforms.
+--
 
 ???
 So is it worth learning  In a way I guess it depends on what your alternative is. If it is another statistical software package, then you want to be careful if it is a commercial package. 
 
 That means you are tied to licences, that can be very expensive.  With R you are no longer dependent on this. 
 
-Because R is opensource and free, and available on Widnows, Mac and linux. That means you can change employers, universities, operating systems and not worry about being able to continue your work. 
+--
+* R is free, open source and available on all three major platforms.
 
-You will also be able to import data in a number of proprietary formats, including Excel, SPSS, STATA and others. You can also interface with python, julia, netlogo, matlab, or any number of analytical tools you can think of if you want to harness the best of both worlds. 
+???
+
+
+Because R is opensource and free, and available on Widnows, Mac and linux. 
+
+That means you can change employers, universities, operating systems and not worry about being able to continue your work. 
+
+You will also be able to import data in a number of proprietary formats, including Excel, SPSS, STATA and others. 
+
+You can also interface with python, julia, netlogo, matlab, or any number of analytical tools you can think of if you want to harness the best of both worlds. 
 
 ---
 #  What exactly is R and why do we use it?
@@ -180,15 +195,6 @@ You can also do spatial analysis in R, and all sorts of mapping. This is data fr
 
 This is a more complex layout, which includes a zoom in into the London area, and this little neat density curve under the legend, giving you an idea of the ovreall distribution.
 
----
-# Dataviz examples
-### Local Autocorrelation--UK census 2001
-
-```{r echo = FALSE}
-knitr::include_graphics("figures/lisa2.jpg")
-```
-???
-This is a version of the spatial autocorrelation analysis map, which usually uses two maps to show the significance of the local autocorrelation, but instead here I used a little x to mark non-significant areas, and larger circles to show significance. 
 
 ---
 # Dataviz examples
@@ -197,6 +203,10 @@ This is a version of the spatial autocorrelation analysis map, which usually use
 ```{r, echo = FALSE, out.width = "700px"}
 knitr::include_graphics("figures/botswana.jpg")
 ```
+???
+
+And here is a more elaborate bar chart I did on household living arrangements of older people in a few African countries. So these are people over 60 living in different types of households, such as single generation or multiple generation. You can compare men and women, but in the background i've also added the country average for comparison. 
+
 
 ---
 # Dataviz examples--animation
@@ -229,7 +239,8 @@ knitr::include_graphics("figures/vietnam.jpg")
 ???
 And finally I wanted to show you an example of interactive data visualisation, this is an example of a chart I did of the farm sizes of Vietnamese households in a farmin survey, and there's quite a lot going on here, and maybe a bit difficult to compare the different provinces, there's fourteen here. 
 
-So I turned this chart into an interactive one using shiny, which is an r package for creating interactive visualisations. So let's see if I can get it up and running.
+So I turned this chart into an interactive one using shiny, which is an r package for creating interactive visualisations.
+ This was actually the first interactive viz i made. So let's see if I can get it up and running.
 
 
 
@@ -390,75 +401,91 @@ So in order not to bore you too much with my slow typing, I've prepared the scri
 ---
 # Linear Regression Modelling in R
 
+```{r, echo = FALSE}
+# load data
+suppressMessages(library(gapminder))
+
+# load other packages needed
+library(ggplot2)
+library(broom)
+library(tidyverse)
+```
+---
+# Linear Regression Modelling in R
+
 ```{r}
-# load data and explore
-library(gapminder)
+# inspect data
 head(gapminder)
-length(unique(gapminder$country))
+unique(gapminder$country)
 min(gapminder$year)
-max(gapminder$year)
+```
+---
+
+# Linear Regression Modelling in R
+
+```{r}
+# plot data
+ggplot(gapminder, aes(year, lifeExp)) +
+  geom_point()  
 ```
 ---
 # Linear Regression Modelling in R
 
 ```{r}
-plot(jitter(gapminder$year), gapminder$lifeExp)
-```
----
-# Linear Regression Modelling in R
-
-```{r}
+# fit model
 reg1 <- lm(lifeExp ~ year, data = gapminder)
-
-summary(reg1)
-
+# inspect regression
+tidy(reg1)
+glance(reg1)
 ```
 
 ---
 # Linear Regression Modelling in R
 
 ```{r, out.height = "450px"}
-plot(jitter(gapminder$year), gapminder$lifeExp)
-abline(reg1$coefficients, col = "red", lwd = 3)
+# plot regression1
+ggplot(gapminder, aes(year, lifeExp)) +
+  geom_point() + 
+  geom_jitter(width = 1) +
+  geom_smooth(se = FALSE, method = "lm") 
 ```
 
 ---
-# Linear Regression Modelling in R
+# Bivariate regression 2
 
 ```{r}
+# bivariate regression 2 ######################################################
 reg2 <- lm(lifeExp ~ gdpPercap, data = gapminder)
-summary(reg2)
-```
-
----
-# Linear Regression Modelling in R
-
-```{r, out.height = "450px"}
-plot(gapminder$gdpPercap, gapminder$lifeExp)
-abline(reg2$coefficients, col = "red", lwd = 3)
+tidy(reg2)
+glance(reg2)
 ```
 
 ---
 # Bivariate regression 2
 
 ```{r, out.height = "450px"}
-reg3 <- lm(lifeExp ~ log(gdpPercap), data = gapminder)
-summary(reg3)
+ggplot(gapminder, aes(gdpPercap, lifeExp)) +
+  geom_point() + 
+  geom_smooth(se = FALSE, method = "lm") 
 ```
+
 ---
 ## Bivariate regression with transformed variable
 
 ```{r, out.height = "450px"}
-plot(log(gapminder$gdpPercap), gapminder$lifeExp)
-abline(reg3$coefficients, col = "red", lwd = 3)
+# fit model
+reg3 <- lm(lifeExp ~ log10(gdpPercap), data = gapminder)
+# inspect model
+glance(reg3)
 ```
+## Bivariate regression with transformed variable
 
----
-## Multiple regression
-
-```{r}
-reg4 <- lm(lifeExp ~ log(gdpPercap) + year, data = gapminder)
-summary(reg4)
+```{r, out.height = "450px"}
+# plot model
+ggplot(gapminder, aes(gdpPercap, lifeExp)) +
+  geom_point() + 
+  geom_smooth(se = FALSE, method = "lm") +
+  scale_x_log10()
 ```
 
 ---
@@ -466,57 +493,43 @@ summary(reg4)
 
 ```{r}
 gapminder.2007 <- subset(gapminder, year == 2007)
-reg5 <- lm(lifeExp ~ log(gdpPercap)  + continent, data = gapminder.2007)
-summary(reg5)
+reg4 <- lm(lifeExp ~ log10(gdpPercap) * continent, data = gapminder.2007)
+tidy(reg4)
+glance(reg4)
 ```
 ---
 ## Multiple regression with categorical variable
 
 ```{r, echo = FALSE}
-coef <- reg5$coefficients
+# plot
+ggplot(gapminder.2007, 
+       aes(gdpPercap, lifeExp, color = continent)) +
+  geom_point() +
+  geom_smooth(se = FALSE, method = "lm") +
+  scale_x_log10()
+```
+---
+## Multiple multiple regressions
 
-plot(log(gapminder.2007$gdpPercap), gapminder.2007$lifeExp, 
-     col =gapminder.2007$continent, pch = 19)
-
-abline(coef[1], coef[2], col = "black")
-abline(coef[1]+ coef[3], coef[2], col = "red")
-abline(coef[1]+ coef[4], coef[2], col = "green3")
-abline(coef[1]+ coef[5], coef[2], col = "blue")
-abline(coef[1]+ coef[6], coef[2], col = "cyan")
-
-legend("topleft", legend = c("Africa", "Americas", "Asia", "Europe", "Oceania"),
-       col = 1:5, pch = 19)
+```{r, echo = FALSE}
+gapminder %>%
+  nest(-year) %>% 
+  mutate(fit = map(data, ~ lm(lifeExp ~ log10(gdpPercap) * continent, data = .x)),  
+         tidied = map(fit, glance)) %>% 
+  unnest(tidied)
 ```
 ---
 ## Multiple regression with interaction term
 
-```{r, echo = FALSE}
-reg6 <- lm(lifeExp ~ log(gdpPercap) * continent, data = gapminder.2007)
-summary(reg6)
+```{r, echo = FALSE, warnings = FALSE}
+# load packages
+suppressMessages(library(plotly))
+
+# create plot object
+gg <- ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent, frame = year)) +
+  geom_point(aes(ids = country, size = pop)) +
+  geom_smooth(se = FALSE, method = "lm") +
+  scale_x_log10()
+ggplotly(gg) %>% 
+  highlight("plotly_hover")
 ```
----
-## Multiple regression with interaction term
-
-```{r, echo = FALSE}
-plot(log(gapminder.2007$gdpPercap), gapminder.2007$lifeExp, 
-     col = gapminder.2007$continent, pch = 19)
-
-abline(reg6$coefficients[1], reg6$coefficients[2])
-abline(reg6$coefficients[1] + reg6$coefficients[3], 
-       reg6$coefficients[2] + reg6$coefficients[7], col = "green3")
-
-abline(reg6$coefficients[1] + reg6$coefficients[4], 
-       reg6$coefficients[2] + reg6$coefficients[8], col = "red")
-
-abline(reg6$coefficients[1] + reg6$coefficients[5], 
-       reg6$coefficients[2] + reg6$coefficients[9], col = "blue")
-
-abline(reg6$coefficients[1] + reg6$coefficients[6], 
-       reg6$coefficients[2] + reg6$coefficients[10], col = "cyan")
-
-legend("topleft", legend = c("Africa", "Americas", "Asia", "Europe", "Oceania"),
-       col = 1:5, pch = 19)
-```
-
----
-
