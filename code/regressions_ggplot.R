@@ -9,6 +9,7 @@ library(gapminder)
 library(ggplot2)
 library(broom)
 library(tidyverse)
+library(plotly)
 
 # inspect data
 head(gapminder)
@@ -25,7 +26,7 @@ reg1 <- lm(lifeExp ~ year, data = gapminder)
 
 # inspect regression
 summary(reg1)
-tidt(reg1)
+tidy(reg1)
 glance(reg1)
 
 # plot regression1
@@ -88,12 +89,9 @@ gapminder %>%
 
 
 # create interactive plot of multiple regressions #############################
-# load packages
-library(plotly)
-
 # create plot object
 gg <- ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent, frame = year)) +
-  geom_point(aes(ids = country, size = pop)) +
+  geom_point(aes(ids = country)) +
   geom_smooth(se = FALSE, method = "lm") +
   scale_x_log10()
 
