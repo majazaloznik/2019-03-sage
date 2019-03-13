@@ -280,10 +280,7 @@ It makes it particularly easy to do everyday tasks, as well as things like creat
 
 ???
 Now however it is time to switch gear, and have a look at R in practice. So let me show you the Rstudio layout, well, by actually showing you the Rstudio layout. 
----
-# Rstudio
 
-???
 So this is a fresh install of both R and Rstudio on a Windows machine. 
 
 OK, we'll start in the left, this is the console, or the command window. 
@@ -315,8 +312,6 @@ So I now want to very quickly go through a few basics of the R language, just to
 
 So the first thing to understand is the assignment of variables. The assignment operator in R is this combination of symbols, smaller than and dash, or hyphen. 
 
-
-
 ---
 # The R language simplified
 
@@ -331,7 +326,7 @@ vec3
 # logical vectors 
 vec4 <- c(TRUE, FALSE, FALSE, TRUE, TRUE)
 vec4
-
+# selecting an element from a vector
 vec3[3]
 ```
 ???
@@ -347,6 +342,9 @@ And you will notice that vectors have to be of the same type, you cannot mix dat
 ### functions in base R
 ```{r}
 mean(vec1)
+rnorm(10)
+rnorm(10, mean = 5)
+rnorm(10, 5, 100)
 ```
 
 ???
@@ -356,25 +354,10 @@ Functions usually take arguments, here the mean function takes the argument the 
 
 For example the function rnorm takes three arguments, we can have a look at the help file to see that. 
 
-In R you don't even have to name the arguments, if it is obvious what they are, because of the order in which you enter them. So in this example we don't have to write sd = 2, we can just write 2. 
+In R you don't even have to name the arguments, if it is obvious what they are, because of the order in which you enter them. So in this example we don't have to write sd = 100, we can just write 100. 
 
 You can get more functions by loading additional packages, but of course you can also write your own! But we don't have time for that today unfortunately, so let's press on. 
 
----
-# The R language simplified
-### data frames
-
-```{r}
-vec5 <- c(1981, 1974, 1993, 1957, 1971)
-
-```
-
-???
-So as social scientists what we all really want is a table of data. In R tables are called data.frames. And they are simply a collection of vectors. 
-
-You will remember I said before that vectors have to be of a single data type, numeric or string for example, now that makes sense, they are variables, and in a data.frame, they become the columns of the table. 
-
-That means they also have to all be the same length. So let's create a data frame. 
 ---
 # The R language simplified
 ### data frames
@@ -391,6 +374,12 @@ my.df
 ```
 
 ???
+So as social scientists what we all really want is a table of data. In R tables are called data.frames. And they are simply a collection of vectors. 
+
+You will remember I said before that vectors have to be of a single data type, numeric or string for example, now that makes sense, they are variables, and in a data.frame, they become the columns of the table. 
+
+That means they also have to all be the same length. So let's create a data frame.
+
 Now one last thing we need to know about dataframes is how to access a column in a dataframe. To do this we use the `$ `operator, so df$like.white.choc is how you access that column. 
 
 SO let's use that to draw a quick plot. 
@@ -401,48 +390,59 @@ So in order not to bore you too much with my slow typing, I've prepared the scri
 ---
 # Linear Regression Modelling in R
 
-```{r, echo = FALSE}
+```{r}
 # load data
-suppressMessages(library(gapminder))
+library(gapminder)
 
 # load other packages needed
 library(ggplot2)
 library(broom)
-library(tidyverse)
+suppressMessages(library(tidyverse))
 ```
 ---
-# Linear Regression Modelling in R
+### Linear Regression Modelling in R
 
 ```{r}
 # inspect data
-head(gapminder)
-unique(gapminder$country)
+head(gapminder, n = 3)
 min(gapminder$year)
+max(gapminder$year)
 ```
 ---
 
-# Linear Regression Modelling in R
+### Linear Regression Modelling in R
 
-```{r}
+```{r, out.height = "400px"}
 # plot data
 ggplot(gapminder, aes(year, lifeExp)) +
   geom_point()  
 ```
+
 ---
-# Linear Regression Modelling in R
+### Linear Regression Modelling in R
+
+```{r, out.height = "400px"}
+# plot data wiht jitter
+ggplot(gapminder, aes(year, lifeExp)) +
+  geom_point()  +
+  geom_jitter()
+```
+---
+### Linear Regression Modelling in R
 
 ```{r}
 # fit model
 reg1 <- lm(lifeExp ~ year, data = gapminder)
 # inspect regression
+# summary(reg1) # uncomment this line to run instead 
 tidy(reg1)
 glance(reg1)
 ```
 
 ---
-# Linear Regression Modelling in R
+### Linear Regression Modelling in R
 
-```{r, out.height = "450px"}
+```{r, out.height = "400px"}
 # plot regression1
 ggplot(gapminder, aes(year, lifeExp)) +
   geom_point() + 
@@ -451,36 +451,38 @@ ggplot(gapminder, aes(year, lifeExp)) +
 ```
 
 ---
-# Bivariate regression 2
+### Bivariate regression 2
 
 ```{r}
-# bivariate regression 2 ######################################################
+# bivariate regression 2 
 reg2 <- lm(lifeExp ~ gdpPercap, data = gapminder)
 tidy(reg2)
 glance(reg2)
 ```
 
 ---
-# Bivariate regression 2
+### Bivariate regression 2
 
-```{r, out.height = "450px"}
+```{r, out.height = "400px"}
 ggplot(gapminder, aes(gdpPercap, lifeExp)) +
   geom_point() + 
   geom_smooth(se = FALSE, method = "lm") 
 ```
 
 ---
-## Bivariate regression with transformed variable
+### Bivariate regression with transformed variable
 
-```{r, out.height = "450px"}
+```{r, out.height = "400px"}
 # fit model
 reg3 <- lm(lifeExp ~ log10(gdpPercap), data = gapminder)
 # inspect model
+tidy(reg3)
 glance(reg3)
 ```
-## Bivariate regression with transformed variable
+---
 
-```{r, out.height = "450px"}
+### Bivariate regression with transformed variable
+```{r, out.height = "400px"}
 # plot model
 ggplot(gapminder, aes(gdpPercap, lifeExp)) +
   geom_point() + 
@@ -489,18 +491,30 @@ ggplot(gapminder, aes(gdpPercap, lifeExp)) +
 ```
 
 ---
-## Multiple regression with categorical variable
-
+### Multiple regression with categorical variable
 ```{r}
+# subset data
 gapminder.2007 <- subset(gapminder, year == 2007)
-reg4 <- lm(lifeExp ~ log10(gdpPercap) * continent, data = gapminder.2007)
-tidy(reg4)
+# fit model
+reg4 <- lm(lifeExp ~ log10(gdpPercap) * continent, 
+           data = gapminder.2007)
 glance(reg4)
 ```
 ---
-## Multiple regression with categorical variable
-
+### Multiple regression with categorical variable
+```{r, eval = FALSE}
+# inspect coefficients
+tidy(reg4)
+```
 ```{r, echo = FALSE}
+# inspect coefficients
+x <- tidy(reg4)
+print(x, width = 70)
+```
+
+---
+### Multiple regression with categorical variable
+```{r,  out.height = "400px"}
 # plot
 ggplot(gapminder.2007, 
        aes(gdpPercap, lifeExp, color = continent)) +
@@ -509,27 +523,68 @@ ggplot(gapminder.2007,
   scale_x_log10()
 ```
 ---
-## Multiple multiple regressions
+### Multiple multiple regressions
 
-```{r, echo = FALSE}
+```{r, eval = FALSE}
 gapminder %>%
+  nest(-year) %>% 
+  mutate(fit = map(data, 
+                   ~ lm(lifeExp ~ log10(gdpPercap) * continent, 
+                        data = .x)),  
+         tidied = map(fit, glance)) %>% 
+  unnest(tidied)
+
+# output on next slide
+```
+---
+### Multiple multiple regressions
+One regression for each year = one row of diagnostic statistics
+```{r, echo = FALSE}
+results <- gapminder %>%
   nest(-year) %>% 
   mutate(fit = map(data, ~ lm(lifeExp ~ log10(gdpPercap) * continent, data = .x)),  
          tidied = map(fit, glance)) %>% 
   unnest(tidied)
+print(results, width = 70)
 ```
 ---
-## Multiple regression with interaction term
+### Multiple regression with interaction term
 
-```{r, echo = FALSE, warnings = FALSE}
+```{r, eval = FALSE}
 # load packages
 suppressMessages(library(plotly))
 
 # create plot object
-gg <- ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent, frame = year)) +
-  geom_point(aes(ids = country, size = pop)) +
+gg <- ggplot(gapminder, aes(gdpPercap, lifeExp, 
+                            color = continent, 
+                            frame = year,
+                            ids = country)) +
+  geom_point(aes(size = pop)) +
+  geom_smooth(se = FALSE, method = "lm") +
+  scale_x_log10()
+
+ggplotly(gg) %>% 
+  highlight("plotly_hover")
+
+# output on next slide
+```
+---
+### Multiple regression with interaction term
+
+```{r, echo = FALSE}
+# load packages
+suppressMessages(library(plotly))
+
+# create plot object
+gg <- ggplot(gapminder, aes(gdpPercap, lifeExp, 
+                            color = continent, 
+                            frame = year,
+                            ids = country)) +
+  geom_point(aes(size = pop)) +
   geom_smooth(se = FALSE, method = "lm") +
   scale_x_log10()
 ggplotly(gg) %>% 
   highlight("plotly_hover")
+
+# output on next slied
 ```
