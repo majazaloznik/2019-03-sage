@@ -31,3 +31,7 @@ next step: regression.
 
 * continue with presentation, missing r code for r language simplified
 * missing data frames
+
+# Wednesday
+
+* they want a copy of the slides, but of course it's not just an html file but the folder with the figures as well... so i can either publish it online on github pages if i can remember how, or save to pdf, but that looses the last interactive plotly chart..
